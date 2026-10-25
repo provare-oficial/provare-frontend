@@ -25,6 +25,7 @@ export default function OnboardingPage() {
   // Passo 1
   const [companyName, setCompanyName] = useState('')
   const [userName, setUserName] = useState('')
+  const [email, setEmail] = useState('')
   const [segment, setSegment] = useState('')
   const [whatsapp, setWhatsapp] = useState('')
 
@@ -50,13 +51,14 @@ export default function OnboardingPage() {
       const formData = new FormData()
       formData.append('company_name', companyName)
       formData.append('user_name', userName)
+      formData.append('email', email)
       formData.append('segment', segment)
       formData.append('whatsapp', whatsapp)
       formData.append('primary_color', primaryColor)
       formData.append('plan', selectedPlan)
       if (logo) formData.append('logo', logo)
-      await api.post('/onboarding', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
-      navigate('/dashboard')
+      await api.post('/companies/onboarding', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+      navigate('/login?cadastro=ok')
     } catch {
       alert('Erro ao criar conta. Tente novamente.')
     } finally {
@@ -92,6 +94,7 @@ export default function OnboardingPage() {
               <div className="space-y-4">
                 <Input label="Nome da empresa" value={companyName} onChange={e => setCompanyName(e.target.value)} placeholder="Ex: Pietra Milano" />
                 <Input label="Seu nome" value={userName} onChange={e => setUserName(e.target.value)} placeholder="Ex: Marco Ferreira" />
+                <Input label="E-mail de acesso" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="seu@email.com" />
                 <div>
                   <label className="block text-sm font-medium mb-2" style={{ color: '#999' }}>Segmento</label>
                   <div className="grid grid-cols-2 gap-2">
@@ -108,7 +111,7 @@ export default function OnboardingPage() {
                 </div>
                 <Input label="WhatsApp da empresa" value={whatsapp} onChange={e => setWhatsapp(e.target.value)} placeholder="(11) 99999-9999" type="tel" />
               </div>
-              <Button className="w-full mt-8" onClick={() => setStep(2)} disabled={!companyName || !userName || !segment}>
+              <Button className="w-full mt-8" onClick={() => setStep(2)} disabled={!companyName || !userName || !email || !segment}>
                 Continuar →
               </Button>
             </div>
@@ -125,7 +128,7 @@ export default function OnboardingPage() {
                 <label className="block text-sm font-medium mb-2" style={{ color: '#999' }}>Logo da empresa</label>
                 <label className="flex flex-col items-center justify-center w-full h-32 rounded-xl cursor-pointer transition-all"
                   style={{ background: '#1A1A1A', border: '2px dashed #2A2A2A' }}>
-                  {logoPreview
+                 {logoPreview
                     ? <img src={logoPreview} alt="Logo" className="h-20 object-contain" />
                     : <><span className="text-3xl mb-2">📷</span><span className="text-sm" style={{ color: '#666' }}>Clique para adicionar o logo</span></>
                   }
@@ -133,7 +136,7 @@ export default function OnboardingPage() {
                 </label>
               </div>
 
-              {/* Cor primária */}
+              {/* Cor principal */}
               <div className="mb-6">
                 <label className="block text-sm font-medium mb-3" style={{ color: '#999' }}>Cor principal</label>
                 <div className="flex gap-3 mb-3">
@@ -195,7 +198,7 @@ export default function OnboardingPage() {
 
               <div className="flex gap-3">
                 <Button variant="secondary" onClick={() => setStep(2)} className="flex-1">← Voltar</Button>
-                <Button onClick={handleStart} loading={loading} className="flex-1">Começar grátis 🎉</Button>
+                <Button onClick={handleStart} loading={loading} className="flex-1">Começar grátis 🏉</Button>
               </div>
               <p className="text-xs text-center mt-4" style={{ color: '#555' }}>Sem compromisso. Cancele quando quiser.</p>
             </div>
