@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="theme-color" content="#0A0A0A" />
+  <title>Provare</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'bg-primary': '#0A0A0A',
+            'bg-secondary': '#111111',
+            'bg-card': '#1A1A1A',
+            'gold': '#C9A84C',
+            'gold-light': '#D4B86A',
+            'text-primary': '#F5F0E8',
+            'text-secondary': '#999999',
+            'text-muted': '#666666',
+            'border-dark': '#2A2A2A',
+          },
+          fontFamily: {
+            'sans': ['Inter', 'sans-serif'],
+            'serif': ['Cormorant Garamond', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --bg-primary: #0A0A0A;
+      --bg-secondary: #111111;
+      --bg-card: #1A1A1A;
+      --gold: #C9A84C;
+      --gold-light: #D4B86A;
+      --text-primary: #F5F0E8;
+      --text-secondary: #999999;
+      --text-muted: #666666;
+      --success: #2ECC71;
+      --warning: #F39C12;
+      --danger: #E74C3C;
+      --border: #2A2A2A;
+    }
+    * { box-sizing: border-box; }
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      margin: 0;
+    }
+    input, textarea, select {
+      font-family: 'Inter', sans-serif;
+    }
+    /* Scrollbar escura */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-primary); }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+    /* Tap highlight removido no mobile */
+    * { -webkit-tap-highlight-color: transparent; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+</html>
