@@ -28,7 +28,7 @@ export default function ProjectDetailPage() {
     setWaLoading(true)
     setWaMessage('')
     try {
-      const res = await api.post(`/projects/${id}/generate-message`)
+      const res = await api.post(`/projects/${id}/book/generate-message`)
       setWaMessage(res.data.message)
     } catch {
       setWaMessage(`${project?.client_name?.split(' ')[0]} ✦\n\nSeu Provare Book foi atualizado.\n\nprovare.com.br/book/${project?.slug}`)
