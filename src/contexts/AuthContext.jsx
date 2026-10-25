@@ -8,15 +8,20 @@ export function AuthProvider({ children }) {
   const [company, setCompany] = useState(null)
   const [loading, setLoading] = useState(true)
 
+  const fetchUserAndCompany = async () => {
+    const [userRes, companyRes] = await Promise.all([
+      api.get('/auth/me'),
+      api.get('/companies/me'),
+    ])
+    setUser(userRes.data)
+    setCompany(companyRes.data)
+  }
+
   // Verifica token ao carregar
   useEffect(() => {
     const token = localStorage.getItem('provare_token')
     if (token) {
-      api.get('/auth/me')
-        .then(res => {
-          setUser(res.data.user)
-          setCompany(res.data.company)
-        })
+      fetchUserAndCompany()
         .catch(() => localStorage.removeItem('provare_token'))
         .finally(() => setLoading(false))
     } else {
@@ -24,12 +29,13 @@ export function AuthProvider({ children }) {
     }
   }, [])
 
-  const login = (token) => {
+  const login = async (token) => {
     localStorage.setItem('provare_token', token)
-    api.get('/auth/me').then(res => {
-      setUser(res.data.user)
-      setCompany(res.data.company)
-    })
+    try {
+      await fetchUserAndCompany()
+    } catch {
+      localStorage.removeItem('provare_token')
+    }
   }
 
   const logout = () => {

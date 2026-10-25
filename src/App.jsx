@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider, useAuth } from './contexts/AuthContext'
 
 import LoginPage from './pages/LoginPage'
+import AuthVerifyPage from './pages/AuthVerifyPage'
 import OnboardingPage from './pages/OnboardingPage'
 import DashboardPage from './pages/DashboardPage'
 import ProjectsPage from './pages/ProjectsPage'
@@ -27,6 +28,7 @@ function AppRoutes() {
     <Routes>
       {/* Públicas */}
       <Route path="/login" element={user ? <Navigate to="/dashboard" replace /> : <LoginPage />} />
+      <Route path="/auth/verify/:token" element={<AuthVerifyPage />} />
       <Route path="/book/:slug" element={<ProvarBookPage />} />
 
       {/* Onboarding (auth mas sem layout) */}
