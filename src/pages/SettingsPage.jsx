@@ -33,7 +33,7 @@ export default function SettingsPage() {
       const fd = new FormData()
       Object.entries(form).forEach(([k, v]) => fd.append(k, v))
       if (logo) fd.append('logo', logo)
-      await api.patch('/company', fd, { headers: { 'Content-Type': 'multipart/form-data' } })
+      await api.patch('/companies/settings', fd, { headers: { 'Content-Type': 'multipart/form-data' } })
       setSaved(true)
       setTimeout(() => setSaved(false), 2000)
     } catch { alert('Erro ao salvar') }
@@ -94,7 +94,7 @@ export default function SettingsPage() {
         <div className="flex items-center justify-between mb-3">
           <div>
             <p className="font-medium text-sm" style={{ color: '#F5F0E8' }}>Plano {company?.plan || 'Pro'}</p>
-            <p className="text-xs mt-0.5" style={{ color: '#666' }}>Próxima cobrança: {company?.next_billing || '—'}</p>
+            <p className="text-xs mt-0.5" style={{ color: '#666' }}>PrƳxima cobrança: {company?.next_billing || '—'}</p>
           </div>
           <span className="text-xs px-2 py-1 rounded-full" style={{ background: '#1a3a1a', color: '#2ECC71' }}>Ativo</span>
         </div>
