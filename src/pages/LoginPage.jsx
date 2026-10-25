@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import api from '../services/api'
 import Button from '../components/Button'
 import Input from '../components/Input'
@@ -8,6 +9,8 @@ export default function LoginPage() {
   const [sent, setSent] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [searchParams] = useSearchParams()
+  const cadastroOk = searchParams.get('cadastro') === 'ok'
 
   const handleSubmit = async e => {
     e.preventDefault()
@@ -38,6 +41,11 @@ export default function LoginPage() {
       <div className="w-full max-w-sm rounded-2xl p-6" style={{ background: '#111', border: '1px solid #1E1E1E' }}>
         {!sent ? (
           <>
+            {cadastroOk && (
+              <div className="mb-4 p-3 rounded-xl text-sm text-center" style={{ background: '#0D2A0D', border: '1px solid #2E7D32', color: '#4CAF50' }}>
+                ✓ Conta criada! Faça login para entrar.
+              </div>
+            )}
             <h2 className="text-base font-medium mb-1" style={{ color: '#F5F0E8' }}>Entrar na sua conta</h2>
             <p className="text-sm mb-6" style={{ color: '#666' }}>Enviaremos um link de acesso para o seu e-mail</p>
 
